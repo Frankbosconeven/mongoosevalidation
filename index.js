@@ -1,8 +1,7 @@
 const express = require("express");
-
 const postRouter = require("./modules/posts/post.route");
-
 const { dbConnect } = require("./config/dbConnect");
+const {authRouter}  = require("./modules/users/auth.route");
 
 const app = express();
 app.use(express.json());
@@ -11,9 +10,10 @@ app.get("/", (req, res) => {
   res.status(200).send("Welcome to my server");
 });
 
+app.use("/auth", authRouter);
 app.use("/post", postRouter);
 
-const start = async() => {
+async function start() {
   await dbConnect();
 
   app.listen(4000, () => {

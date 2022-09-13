@@ -4,14 +4,20 @@ const postSchema = new Schema({
     title: {
         type: String,
         required: true,
+        minLength: 10,
     },
-
+    body:{
+        type: String,
+        required: true,
+    },
     published: {
         type: Boolean,
         default: false,
-        min: [4, "enter a valid word"]
-    
     },
-});
+},
+{
+    timestamps: true,
+}
+);
 
 module.exports = model("Post", postSchema);
